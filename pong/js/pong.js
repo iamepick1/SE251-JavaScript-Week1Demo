@@ -5,24 +5,27 @@ let ctx = c.getContext(`2d`)
 // Timer to make the game run at 60fps
 let timer = setInterval(main, 1000/60)
 
-let players = [new Player(), new Player()]
 
 
 // Global friction variable
 let fy = .97
 
-// Player 1 (players[0].pad) setup
-//players[0].pad = new Box();
-players[0].pad.w = 20
-players[0].pad.h = 150
-players[0].pad.x = 0 + players[0].pad.w/2
+// players setups
 
-//players[1].pad = new Box();
-players[1].pad.w = 20
-players[1].pad.h = 150
-players[1].pad.x = c.width - players[1].pad.w/2
+let players = [new Player(), new Player()]
+let pads = [players[0].pad, players[1].pad]
+
+pads[0].w = 20
+pads[0].h = 150
+pads[0].x = 0 + pads[0].w/2
+
+
+pads[1].w = 20
+pads[1].h = 150
+pads[1].x = c.width - pads[1].w/2
 
 console.log(players)
+console.log(pads)
 
 // Ball setup
 let ball = new Box();
@@ -38,64 +41,64 @@ function main()
     ctx.clearRect(0,0,c.width,c.height)
     
 
-    // players[0].pad stuff
-    // players[0].pad accelerates when key is pressed 
+    // pads[0] stuff
+    // pads[0] accelerates when key is pressed 
     if(keys[`w`])
     {
-       players[0].pad.vy += -players[0].pad.force
+       pads[0].vy += -pads[0].force
     }
 
     if(keys[`s`])
     {
-        players[0].pad.vy += players[0].pad.force
+        pads[0].vy += pads[0].force
     }
 
     // Applies friction
-    players[0].pad.vy *= fy
+    pads[0].vy *= fy
     // Player movement
-    players[0].pad.move();
+    pads[0].move();
 
     // Ball movement
     ball.move()
 
-    // players[0].pad collision
-    if (players[0].pad.y < 0+players[0].pad.h/2)
+    // pads[0] collision
+    if (pads[0].y < 0+pads[0].h/2)
     {
-        players[0].pad.y = 0+players[0].pad.h/2
+        pads[0].y = 0+pads[0].h/2
     }
-    if (players[0].pad.y > c.height-players[0].pad.h/2)
+    if (pads[0].y > c.height-pads[0].h/2)
     {
-        players[0].pad.y = c.height-players[0].pad.h/2
+        pads[0].y = c.height-pads[0].h/2
     }
 
-    // players[1].pad stuff
-    // players[1].pad accelerates when key is pressed 
+    // pads[1] stuff
+    // pads[1] accelerates when key is pressed 
     if(keys[`ArrowUp`])
     {
-       players[1].pad.vy += -players[1].pad.force
+       pads[1].vy += -pads[1].force
     }
 
     if(keys[`ArrowDown`])
     {
-        players[1].pad.vy += players[1].pad.force
+        pads[1].vy += pads[1].force
     }
 
     // Applies friction
-    players[1].pad.vy *= fy
+    pads[1].vy *= fy
     // Player movement
-    players[1].pad.move();
+    pads[1].move();
 
     // Ball movement
     ball.move()
 
-    // players[1].pad collision
-    if (players[1].pad.y < 0+players[1].pad.h/2)
+    // pads[1] collision
+    if (pads[1].y < 0+pads[1].h/2)
     {
-        players[1].pad.y = 0+players[1].pad.h/2
+        pads[1].y = 0+pads[1].h/2
     }
-    if (players[1].pad.y > c.height-players[1].pad.h/2)
+    if (pads[1].y > c.height-pads[1].h/2)
     {
-        players[1].pad.y = c.height-players[1].pad.h/2
+        pads[1].y = c.height-pads[1].h/2
     }
 
     // Ball collision 
@@ -120,21 +123,21 @@ function main()
         ball.vy = -ball.vy       
     }
 
-    // players[0].pad with ball collision
-    if (ball.collide(players[0].pad))
+    // pads[0] with ball collision
+    if (ball.collide(pads[0]))
     {
-        ball.x = players[0].pad.x + players[0].pad.w/2 + ball.w/2
+        ball.x = pads[0].x + pads[0].w/2 + ball.w/2
         ball.vx = -ball.vx;
     }
-    // players[1].pad with ball collision
-    if (ball.collide(players[1].pad))
+    // pads[1] with ball collision
+    if (ball.collide(pads[1]))
     {
-        ball.x = players[1].pad.x - players[1].pad.w/2 - ball.w/2
+        ball.x = pads[1].x - pads[1].w/2 - ball.w/2
         ball.vx = -ball.vx;
     }
 
     // Draw the objects
-    players[0].pad.draw()
-    players[1].pad.draw()
+    pads[0].draw()
+    pads[1].draw()
     ball.draw()
 }
