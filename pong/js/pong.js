@@ -1,6 +1,7 @@
 // Canvas and context
 let c = document.querySelector(`#pong`)
 let ctx = c.getContext(`2d`)
+let score = document.querySelectorAll("#score div")
 
 // Timer to make the game run at 60fps
 let timer = setInterval(main, 1000/60)
@@ -26,6 +27,7 @@ pads[1].x = c.width - pads[1].w/2
 
 console.log(players)
 console.log(pads)
+console.log(score)
 
 // Ball setup
 let ball = new Box();
@@ -144,4 +146,7 @@ function main()
     pads[0].draw()
     pads[1].draw()
     ball.draw()
+    for(i = 0; i<score.length; i++){
+        score[i].innerHTML = `${players[i].score}`
+    }
 }
