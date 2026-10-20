@@ -12,7 +12,7 @@ let fy = .97
 
 // players setups
 
-let players = [new Player(), new Player()]
+let players = [new Player("PR1", new Box()), new Player("PR2", new Box())]
 let pads = [players[0].pad, players[1].pad]
 
 pads[0].w = 20
@@ -106,11 +106,15 @@ function main()
     {
         ball.x = c.width/2
         ball.y = c.height/2
+        players[0].score += 1
+        console.log(`${players[0].score} | ${players[1].score}`)
     }
     if (ball.x > c.width)
     {
         ball.x = c.width/2
         ball.y = c.height/2
+        players[1].score += 1
+        console.log(`${players[0].score} | ${players[1].score}`)
     }
     if (ball.y < 0)
     {
