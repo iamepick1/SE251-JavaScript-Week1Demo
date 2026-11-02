@@ -9,7 +9,7 @@ const optSides = document.getElementsByClassName("sides")
 // optSides[0].classList.toggle("hidden")
 opt.addEventListener("click", toggleHide)
 // console.log("aasas2")
-function toggleHide(){
+function toggleHide() {
     optSides[0].classList.toggle("hidden")
 }
 /*---------
@@ -23,13 +23,15 @@ function toggleHide(){
 -----------*/
 const outs = document.getElementsByClassName("output")
 const fills = document.getElementsByClassName("fill")
+const strokes = document.getElementsByClassName("stroke")
+const ballEl = document.getElementById("ball")
 console.log("asd")
 // console.log(player)
-for(i=0;i<fills.length;i++){
+for (i = 0; i < fills.length; i++) {
     // console.log("asdddd")
     // console.log(player[i].fill)
     fills[i].value = player[i].fill
-    fills[i].addEventListener("input", function(e){
+    fills[i].addEventListener("input", function (e) {
         let t = e.target.nextElementSibling
         t.innerHTML = e.target.value
         console.log(e.target.parentElement.classList[1])
@@ -39,6 +41,30 @@ for(i=0;i<fills.length;i++){
         // console.log(player)
     })
 }
+for (i = 0; i < strokes.length; i++) {
+    // console.log("asdddd")
+    // console.log(player[i].stroke)
+    strokes[i].value = player[i].stroke
+    strokes[i].addEventListener("input", function (e) {
+        let t = e.target.nextElementSibling
+        t.innerHTML = e.target.value
+        console.log(e.target.parentElement.classList[1])
+        ind = e.target.parentElement.classList[1]
+        player[ind].stroke = e.target.value
+        player[ind].pad.stroke = player[ind].stroke
+        // console.log(player)
+    })
+}
+
+ballEl.value = ball.fill
+ballEl.addEventListener("input", function (e) {
+    let t = e.target.nextElementSibling
+    t.innerHTML = e.target.value
+    console.log(e.target.parentElement.classList[1])
+    ind = e.target.parentElement.classList[1]
+    ball.fill = e.target.value
+    // console.log(player)
+})
 /*---------
     Program the six key inputs to do the following:
     . Display the correct key names for each player   
@@ -50,45 +76,53 @@ for(i=0;i<fills.length;i++){
 const u = document.getElementsByClassName("u")
 const d = document.getElementsByClassName("d")
 const s = document.getElementsByClassName("s")
-for(i=0;i<u.length;i++){
+for (i = 0; i < u.length; i++) {
     console.log(player)
     u[i].value = player[i].keys["u"]
     u[i].nextElementSibling.innerHTML = u[i].value
-    u[i].addEventListener("input", function(e){
+    u[i].addEventListener("input", function (e) {
         let t = e.target.nextElementSibling
         t.innerHTML = e.target.value
         console.log(e.target.parentElement.classList[1])
         ind = e.target.parentElement.classList[1]
         player[ind].keys["u"] = e.target.value
-        // player[ind].pad.fill = player[ind].fill
         console.log(player[i].keys, t, ind)
     })
 }
-for(i=0;i<d.length;i++){
+for (i = 0; i < d.length; i++) {
     console.log(player)
     d[i].value = player[i].keys["d"]
     d[i].nextElementSibling.innerHTML = d[i].value
-    d[i].addEventListener("input", function(e){
+    d[i].addEventListener("input", function (e) {
         let t = e.target.nextElementSibling
         t.innerHTML = e.target.value
         console.log(e.target.parentElement.classList[1])
         ind = e.target.parentElement.classList[1]
         player[ind].keys["d"] = e.target.value
-        // player[ind].pad.fill = player[ind].fill
         console.log(player[i].keys, t, ind)
     })
 }
-for(i=0;i<s.length;i++){
+for (i = 0; i < s.length; i++) {
     console.log(player)
     s[i].value = player[i].keys["s"]
     s[i].nextElementSibling.innerHTML = s[i].value
-    s[i].addEventListener("input", function(e){
+    s[i].addEventListener("input", function (e) {
         let t = e.target.nextElementSibling
         t.innerHTML = e.target.value
         console.log(e.target.parentElement.classList[1])
         ind = e.target.parentElement.classList[1]
         player[ind].keys["s"] = e.target.value
-        // player[ind].pad.fill = player[ind].fill
         console.log(player[i].keys, t, ind)
     })
 }
+// currentState = "pause"
+
+const ins = document.getElementsByClassName("input")
+for (i = 0; i < ins.length; i++) {
+    // console.log(ins[i])
+    ins[i].addEventListener("focus", function (e) {
+        // console.log("focus")
+        currentState = "pause"
+    })
+}
+
